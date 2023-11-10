@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Highchartsでグラフ作成</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 680px; height: 550px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        window.onload = function() {
+            var data = require('./data.original.json');
+            Highcharts.chart('container', {
+                // グラフ属性設定
+                // 各属性の詳細：https://api.highcharts.com/highcharts/
+                title : {
+                    text: '商品A～商品Eの2018年度月間売上'   
+                },
+                xAxis : {
+                    categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis : {
+                    title: {
+                        text: '売上高 (万円)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip : {
+                    valueSuffix: '万円'
+                },
+                legend : {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series : data,
+                
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 600
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>

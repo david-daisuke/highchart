@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Highchartsでグラフ作成 web internal</title>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 680px; height: 550px; margin: 0 auto"></div>
+    <script language="JavaScript">
+   window.onload = function() {
+  // データファイルを読み込む
+  var data = fetch('./data.json', {
+  crossorigin: 'anonymous'
+}).then(response => response.json());
+
+  // グラフを作成
+  Highcharts.chart('container', {
+    // グラフ属性設定
+    // 各属性の詳細：https://api.highcharts.com/highcharts/
+    title : {
+      text: 'web-internal統計'   
+    },
+    xAxis : {
+      categories: ['10', '20', '30', '40', '50', '60', '70', '80', '90', '10', '11', '12']
+    },
+    yAxis : {
+      title: {
+        text: 'value'
+      },
+      plotLines: [{
+        value: 0,
+        width: 1,
+        color: '#808080'
+      }]
+    },
+    tooltip : {
+      valueSuffix: 'xxx'
+    },
+    legend : {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle',
+      borderWidth: 0
+    },
+    series : data,      
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 600
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                }
+            });
+   }
+    </script>
+</body>
+</html>
